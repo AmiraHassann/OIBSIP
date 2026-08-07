@@ -68,7 +68,8 @@ Multiplication and division are processed before addition and subtraction to pre
 - [x] No eval()
 
 ## Author
-Amira Abdelhafeez Abdelsamie
+
+**Amira AbdElhafeez** 
 
 ## Internship
 Oasis Infobyte – Web Development & Designing
