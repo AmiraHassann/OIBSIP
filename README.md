@@ -65,20 +65,6 @@ WebDev-L2-Task2-TributePage
 
 A responsive task management application that allows users to organize and track daily tasks.
 
-### Features
-
-- Add tasks
-- Pending Tasks list
-- Completed Tasks list
-- Mark tasks as complete
-- Edit tasks
-- Delete tasks
-- Pending and completed counters
-- Empty state messages
-- Task timestamps
-- localStorage persistence
-- Responsive design
-
 ### Technologies Used
 
 - HTML5
@@ -90,25 +76,13 @@ A responsive task management application that allows users to organize and track
 
 ```text
 WebDev-L2-Task3-ToDoWebApp
----
+```
 
 ## Task 4 – Login Authentication System
 
 ### Description
 
 A client-side authentication system built with HTML, CSS, and Vanilla JavaScript.
-
-### Features
-
-- User registration
-- User login
-- Password validation
-- Duplicate username/email detection
-- SHA-256 password hashing using Web Crypto API
-- localStorage-based session management
-- Protected dashboard
-- Authentication guard for protected pages
-- Logout functionality
 
 ### Technologies Used
 
