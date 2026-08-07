@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Authentication System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <section class="auth-card">
+
+            <h1>Create Account</h1>
+
+            <form id="registerForm" novalidate>
+
+                <div class="form-group">
+                    <label for="registerUsername">
+                        Username or Email
+                    </label>
+
+                    <input type="text" id="registerUsername" name="username" autocomplete="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+                    <input type="password" id="registerPassword" name="password" autocomplete="new-password" required>
+                </div>
+
+                <div id="registerError" class="message error-message" aria-live="polite"></div>
+
+                <div id="registerSuccess" class="message success-message" aria-live="polite"></div>
+
+                <button type="submit">
+                    Register
+                </button>
+
+            </form>
+
+            <p class="auth-link">
+                Already have an account?
+                <a href="index.html">Login</a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

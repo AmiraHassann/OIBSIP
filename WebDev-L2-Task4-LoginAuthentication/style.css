@@ -1,0 +1,215 @@
+/* ==========================
+   RESET
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success-color: #16a34a;
+    --error-color: #dc2626;
+    --text-color: #1f2937;
+    --border-color: #d1d5db;
+    --card-bg: #ffffff;
+    --page-bg: linear-gradient(135deg, #eff6ff, #dbeafe);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--page-bg);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+/* ==========================
+   AUTH PAGES
+========================== */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    border-color: var(--primary-color);
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+button:focus {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+}
+
+/* ==========================
+   MESSAGES
+========================== */
+
+.message {
+    min-height: 24px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.error-message {
+    color: var(--error-color);
+}
+
+.success-message {
+    color: var(--success-color);
+}
+
+/* ==========================
+   AUTH LINKS
+========================== */
+
+.auth-link {
+    margin-top: 1.25rem;
+    text-align: center;
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================
+   DASHBOARD
+========================== */
+
+.dashboard-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.dashboard-card {
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.dashboard-card h1 {
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-content {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-content h2 {
+    margin-bottom: 0.75rem;
+}
+
+.dashboard-content p {
+    line-height: 1.6;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px) {
+
+    .auth-card,
+    .dashboard-card {
+        padding: 1.5rem;
+    }
+
+    .auth-card h1,
+    .dashboard-card h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .auth-card,
+    .dashboard-card {
+        padding: 1.25rem;
+    }
+
+    .form-group input,
+    button {
+        font-size: 0.95rem;
+    }
+}
