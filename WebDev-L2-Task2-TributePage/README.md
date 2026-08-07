@@ -87,7 +87,6 @@ The layout uses CSS Grid and responsive media queries to adapt smoothly across d
 - [x] Responsive layout
 
 ## Author
-
 **Amira AbdElhafeez** 
 
 Created for the **Oasis Infobyte Web Development & Designing Internship**.
