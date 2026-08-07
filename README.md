@@ -13,11 +13,11 @@ The Oasis Infobyte Web Development & Designing Internship provides hands-on expe
 ## Level 2 Projects
 
 | Task | Project | Technologies | Status | 
-|--------|----------|--------------|----------|----------|
-| Task 1 | Calculator | HTML5, CSS3, Vanilla JavaScript | ✅ Completed |
-| Task 2 | Tribute Page (Mohamed Salah) | HTML5, CSS3 | ✅ Completed |
-| Task 3 | To-Do Web App | HTML5, CSS3, Vanilla JavaScript, localStorage | ✅ Completed  |
-| Task 4 | Login Authentication System | HTML5, CSS3, Vanilla JavaScript, localStorage, Web Crypto API | ✅ Completed |
+|--------|----------|--------------|----------|----------
+| Task 1 | Calculator | HTML5, CSS3, Vanilla JavaScript | ✅ Completed 
+| Task 2 | Tribute Page (Mohamed Salah) | HTML5, CSS3 | ✅ Completed 
+| Task 3 | To-Do Web App | HTML5, CSS3, Vanilla JavaScript, localStorage | ✅ Completed  
+| Task 4 | Login Authentication System | HTML5, CSS3, Vanilla JavaScript, localStorage, Web Crypto API | ✅ Completed 
 
 **GitHub Pages Repository URL:**  
 https://amirahassann.github.io/OIBSIP/
