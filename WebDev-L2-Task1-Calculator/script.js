@@ -4,26 +4,66 @@ const errorDisplay = document.getElementById('error');
 const buttons = document.querySelector('.buttons');
 
 let currentInput = '0';
-let firstOperand = null;
-let operator = null;
+let expressionTokens = [];
 let waitingForSecondOperand = false;
 let justEvaluated = false;
 let hasError = false;
 
-function updateDisplay() {
-	resultDisplay.textContent = currentInput;
-
-	if (firstOperand !== null && operator !== null) {
-		historyDisplay.textContent = `${firstOperand} ${getOperatorSymbol(operator)}`;
-	} else {
-		historyDisplay.innerHTML = '&nbsp;';
+function getOperatorSymbol(operator) {
+	if (operator === '*') {
+		return '×';
 	}
+
+	if (operator === '/') {
+		return '÷';
+	}
+
+	if (operator === '-') {
+		return '−';
+	}
+
+	return '+';
+}
+
+function isOperator(token) {
+	return token === '+' || token === '-' || token === '*' || token === '/';
+}
+
+function formatNumber(value) {
+	if (!Number.isFinite(value)) {
+		return null;
+	}
+
+	const roundedValue = Number(value.toFixed(10));
+	return String(roundedValue);
+}
+
+function tokensToText(tokens) {
+	return tokens
+		.map((token) => (isOperator(token) ? getOperatorSymbol(token) : token))
+		.join(' ');
+}
+
+function buildHistoryText() {
+	if (expressionTokens.length === 0) {
+		return currentInput;
+	}
+
+	if (justEvaluated || waitingForSecondOperand) {
+		return tokensToText(expressionTokens);
+	}
+
+	return `${tokensToText(expressionTokens)} ${currentInput}`;
+}
+
+function updateDisplay() {
+	historyDisplay.textContent = buildHistoryText();
+	resultDisplay.textContent = currentInput;
 }
 
 function showError(message) {
 	hasError = true;
 	errorDisplay.textContent = message;
-	historyDisplay.innerHTML = '&nbsp;';
 	resultDisplay.textContent = 'Error';
 }
 
@@ -34,69 +74,81 @@ function clearError() {
 
 function resetCalculator() {
 	currentInput = '0';
-	firstOperand = null;
-	operator = null;
+	expressionTokens = [];
 	waitingForSecondOperand = false;
 	justEvaluated = false;
 	clearError();
 	updateDisplay();
 }
 
-function getOperatorSymbol(value) {
-	if (value === '*') {
-		return '×';
+function calculateExpression(tokens) {
+	if (tokens.length === 0) {
+		return '0';
 	}
 
-	if (value === '/') {
-		return '÷';
+	const workingTokens = tokens.slice();
+
+	for (let index = 0; index < workingTokens.length; index += 1) {
+		if (!isOperator(workingTokens[index])) {
+			continue;
+		}
+
+		const leftValue = Number(workingTokens[index - 1]);
+		const rightValue = Number(workingTokens[index + 1]);
+
+		if (!Number.isFinite(leftValue) || !Number.isFinite(rightValue)) {
+			return null;
+		}
+
+		if (workingTokens[index] === '*') {
+			const product = formatNumber(leftValue * rightValue);
+
+			if (product === null) {
+				return null;
+			}
+
+			workingTokens.splice(index - 1, 3, product);
+			index -= 1;
+			continue;
+		}
+
+		if (workingTokens[index] === '/') {
+			if (rightValue === 0) {
+				showError('Cannot divide by zero.');
+				return null;
+			}
+
+			const quotient = formatNumber(leftValue / rightValue);
+
+			if (quotient === null) {
+				return null;
+			}
+
+			workingTokens.splice(index - 1, 3, quotient);
+			index -= 1;
+		}
 	}
 
-	if (value === '-') {
-		return '−';
+	let result = Number(workingTokens[0]);
+
+	for (let index = 1; index < workingTokens.length; index += 2) {
+		const operator = workingTokens[index];
+		const nextValue = Number(workingTokens[index + 1]);
+
+		if (!Number.isFinite(result) || !Number.isFinite(nextValue)) {
+			return null;
+		}
+
+		if (operator === '+') {
+			result += nextValue;
+		} else if (operator === '-') {
+			result -= nextValue;
+		} else {
+			return null;
+		}
 	}
 
-	return '+';
-}
-
-function calculate(a, selectedOperator, b) {
-	const left = Number(a);
-	const right = Number(b);
-
-	if (selectedOperator === '/' && right === 0) {
-		showError('Cannot divide by zero.');
-		return null;
-	}
-
-	let result;
-
-	switch (selectedOperator) {
-		case '+':
-			result = left + right;
-			break;
-		case '-':
-			result = left - right;
-			break;
-		case '*':
-			result = left * right;
-			break;
-		case '/':
-			result = left / right;
-			break;
-		default:
-			result = right;
-	}
-
-	return formatResult(result);
-}
-
-function formatResult(value) {
-	if (!Number.isFinite(value)) {
-		showError('Calculation produced an invalid result.');
-		return null;
-	}
-
-	const rounded = Number(value.toFixed(10));
-	return String(rounded);
+	return formatNumber(result);
 }
 
 function appendNumber(number) {
@@ -104,9 +156,9 @@ function appendNumber(number) {
 		resetCalculator();
 	}
 
-	if (justEvaluated && operator === null) {
+	if (justEvaluated) {
 		currentInput = '0';
-		firstOperand = null;
+		expressionTokens = [];
 		justEvaluated = false;
 	}
 
@@ -120,7 +172,7 @@ function appendNumber(number) {
 			return;
 		}
 
-		currentInput = `${currentInput}.`;
+		currentInput = currentInput === '0' ? '0.' : `${currentInput}.`;
 		updateDisplay();
 		return;
 	}
@@ -139,48 +191,49 @@ function handleOperator(nextOperator) {
 		return;
 	}
 
-	if (waitingForSecondOperand && operator !== null) {
-		operator = nextOperator;
+	if (justEvaluated) {
+		expressionTokens = [];
+		justEvaluated = false;
+	}
+
+	if (expressionTokens.length === 0) {
+		expressionTokens.push(currentInput, nextOperator);
+		waitingForSecondOperand = true;
+		currentInput = '0';
 		updateDisplay();
 		return;
 	}
 
-	if (firstOperand !== null && operator !== null) {
-		const computedValue = calculate(firstOperand, operator, currentInput);
-
-		if (hasError || computedValue === null) {
-			return;
-		}
-
-		firstOperand = computedValue;
-		currentInput = computedValue;
+	if (waitingForSecondOperand) {
+		expressionTokens[expressionTokens.length - 1] = nextOperator;
 	} else {
-		firstOperand = currentInput;
+		expressionTokens.push(currentInput, nextOperator);
+		waitingForSecondOperand = true;
+		currentInput = '0';
 	}
 
-	operator = nextOperator;
-	waitingForSecondOperand = true;
-	justEvaluated = false;
 	updateDisplay();
 }
 
 function handleEquals() {
-	if (hasError || firstOperand === null || operator === null) {
+	if (hasError || waitingForSecondOperand || justEvaluated) {
 		return;
 	}
 
-	const computedValue = calculate(firstOperand, operator, currentInput);
+	const tokensToEvaluate = expressionTokens.length === 0
+		? [currentInput]
+		: expressionTokens.concat(currentInput);
+	const computedValue = calculateExpression(tokensToEvaluate);
 
-	if (hasError || computedValue === null) {
+	if (computedValue === null) {
 		return;
 	}
 
 	currentInput = computedValue;
-	firstOperand = null;
-	operator = null;
+	expressionTokens = tokensToEvaluate;
 	waitingForSecondOperand = false;
 	justEvaluated = true;
-	historyDisplay.innerHTML = '&nbsp;';
+	clearError();
 	updateDisplay();
 }
 
@@ -190,14 +243,41 @@ function handleDelete() {
 		return;
 	}
 
-	if (waitingForSecondOperand || justEvaluated) {
+	if (justEvaluated) {
 		return;
 	}
 
-	if (currentInput.length <= 1) {
-		currentInput = '0';
-	} else {
+	if (waitingForSecondOperand) {
+		if (expressionTokens.length >= 2) {
+			currentInput = expressionTokens[expressionTokens.length - 2];
+			expressionTokens = expressionTokens.slice(0, -2);
+		} else {
+			currentInput = '0';
+			expressionTokens = [];
+		}
+
+		waitingForSecondOperand = false;
+		updateDisplay();
+		return;
+	}
+
+	if (currentInput.length > 1) {
 		currentInput = currentInput.slice(0, -1);
+
+		if (currentInput === '-' || currentInput === '') {
+			if (expressionTokens.length > 0) {
+				currentInput = '0';
+				waitingForSecondOperand = true;
+			} else {
+				currentInput = '0';
+			}
+		}
+	} else {
+		currentInput = '0';
+
+		if (expressionTokens.length > 0) {
+			waitingForSecondOperand = true;
+		}
 	}
 
 	updateDisplay();
@@ -210,7 +290,7 @@ buttons.addEventListener('click', (event) => {
 		return;
 	}
 
-	const { number, operator: selectedOperator, action } = target.dataset;
+	const { number, operator, action } = target.dataset;
 
 	if (number !== undefined) {
 		appendNumber(number);
@@ -233,8 +313,8 @@ buttons.addEventListener('click', (event) => {
 		return;
 	}
 
-	if (selectedOperator) {
-		handleOperator(selectedOperator);
+	if (operator) {
+		handleOperator(operator);
 	}
 });
 
