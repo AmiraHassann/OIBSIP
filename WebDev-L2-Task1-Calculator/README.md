@@ -6,6 +6,9 @@ Level 2 – Task 1
 ## Project Overview
 This project is a browser-based calculator built as part of the Oasis Infobyte Web Development & Designing internship. It provides a clean, responsive interface for performing basic arithmetic with a simple and readable user experience.
 
+## Live Demo
+[View the live demo](https://amirahassann.github.io/OIBSIP/WebDev-L2-Task1-Calculator/)
+
 ## Features
 - Basic arithmetic operations
 - Numbers 0–9
