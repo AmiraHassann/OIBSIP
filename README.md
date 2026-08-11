@@ -35,3 +35,4 @@ A responsive calculator application built using HTML, CSS, and Vanilla JavaScrip
 ```text
 WebDev-L2-Task1-Calculator
 ```
+
