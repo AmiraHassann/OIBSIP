@@ -15,6 +15,7 @@ The Oasis Infobyte Web Development & Designing Internship provides hands-on expe
 | Task | Project | Technologies | Status | 
 |--------|----------|--------------|----------|
 | Task 1 | Calculator | HTML5, CSS3, Vanilla JavaScript | ✅ Completed 
+| Task 2 | Tribute Page (Mohamed Salah) | HTML5, CSS3 | ✅ Completed 
 
 ---
 
@@ -35,4 +36,19 @@ A responsive calculator application built using HTML, CSS, and Vanilla JavaScrip
 ```text
 WebDev-L2-Task1-Calculator
 ```
+## Task 2 – Tribute Page
 
+### Description
+
+A tribute webpage dedicated to **Mohamed Salah**, highlighting his life, football career, achievements, and impact as one of the most recognized football players.
+
+### Technologies Used
+
+- HTML5
+- CSS3
+
+### Folder
+
+```text
+WebDev-L2-Task2-TributePage
+```
