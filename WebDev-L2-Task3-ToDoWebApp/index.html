@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A modern responsive to-do web app for the Oasis Infobyte internship.">
+	<title>To-Do Web App | Oasis Infobyte</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
+</head>
+<body>
+	<div class="app-shell">
+		<header class="hero">
+			<div class="container hero__inner">
+				<p class="eyebrow">Oasis Infobyte Web Development &amp; Designing Internship</p>
+				<h1>To-Do Web App</h1>
+				<p class="hero__subtitle">Organize daily tasks with a clean, responsive planner built with HTML, CSS, and vanilla JavaScript.</p>
+			</div>
+		</header>
+
+		<main class="container main-grid">
+			<section class="panel panel--composer" aria-labelledby="task-form-title">
+				<div class="panel__heading-block">
+					<p class="section-label">Quick Add</p>
+					<h2 id="task-form-title">Create a new task</h2>
+				</div>
+
+				<form id="task-form" class="task-form" autocomplete="off">
+					<label class="sr-only" for="task-input">Task description</label>
+					<input id="task-input" name="task" type="text" maxlength="120" placeholder="What do you need to do?" aria-describedby="task-help">
+					<button type="submit" class="btn btn--primary">Add Task</button>
+				</form>
+				<p id="task-help" class="help-text">Tasks are saved automatically in your browser.</p>
+			</section>
+
+			<section class="lists-grid" aria-label="Task lists">
+				<section class="panel tasks-panel" aria-labelledby="pending-heading">
+					<div class="panel__heading-block panel__heading-block--row">
+						<div>
+							<p class="section-label">Pending Tasks</p>
+							<h2 id="pending-heading">Tasks to finish</h2>
+						</div>
+						<span id="pending-count" class="counter" aria-live="polite">0 pending</span>
+					</div>
+					<div id="pending-empty" class="empty-state">No pending tasks. You're all caught up!</div>
+					<ul id="pending-list" class="task-list" aria-live="polite" aria-relevant="additions removals text"></ul>
+				</section>
+
+				<section class="panel tasks-panel" aria-labelledby="completed-heading">
+					<div class="panel__heading-block panel__heading-block--row">
+						<div>
+							<p class="section-label">Completed Tasks</p>
+							<h2 id="completed-heading">Finished work</h2>
+						</div>
+						<span id="completed-count" class="counter" aria-live="polite">0 completed</span>
+					</div>
+					<div id="completed-empty" class="empty-state">No completed tasks yet.</div>
+					<ul id="completed-list" class="task-list" aria-live="polite" aria-relevant="additions removals text"></ul>
+				</section>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
