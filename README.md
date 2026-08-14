@@ -16,6 +16,7 @@ The Oasis Infobyte Web Development & Designing Internship provides hands-on expe
 |--------|----------|--------------|----------|
 | Task 1 | Calculator | HTML5, CSS3, Vanilla JavaScript | ✅ Completed 
 | Task 2 | Tribute Page (Mohamed Salah) | HTML5, CSS3 | ✅ Completed 
+| Task 3 | To-Do Web App | HTML5, CSS3, Vanilla JavaScript, localStorage | ✅ Completed  
 
 ---
 
@@ -51,4 +52,22 @@ A tribute webpage dedicated to **Mohamed Salah**, highlighting his life, footbal
 
 ```text
 WebDev-L2-Task2-TributePage
+```
+## Task 3 – To-Do Web App
+
+### Description
+
+A responsive task management application that allows users to organize and track daily tasks.
+
+### Technologies Used
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- localStorage
+
+### Folder
+
+```text
+WebDev-L2-Task3-ToDoWebApp
 ```
