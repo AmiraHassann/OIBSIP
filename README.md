@@ -91,22 +91,3 @@ A client-side authentication system built with HTML, CSS, and Vanilla JavaScript
 ```text
 WebDev-L2-Task4-LoginAuthentication
 ```
-### Security Note
-
-This project is a front-end educational implementation that uses localStorage and client-side SHA-256 hashing for demonstration purposes. It is not intended to be production-grade authentication. Real-world applications should use secure backend authentication, server-side password hashing, protected session management, and database-backed user storage.
-
----
-
-## Skills Demonstrated
-
-- HTML5
-- CSS3
-- Responsive Web Design
-- CSS Grid
-- Flexbox
-- Vanilla JavaScript
-- DOM Manipulation
-- Event Listeners
-- Form Validation
-- localStorage
-- Web 
